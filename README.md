@@ -12,7 +12,8 @@ https://github.com/trick77/tunlr-style-dns-unblocking/
 Running
 --------
 
-Running netproxy is easy. If you have Docker installed, just clone the repository and run:
+Running netproxy is easy. If you have Docker installed, just clone the repository, edit `config.json` to replace
+`YOURIPHERE` with the external IP of your *server*, and run:
 
     docker build -t skorokithakis/netproxy .
 
