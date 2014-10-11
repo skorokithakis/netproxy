@@ -13,6 +13,6 @@ Running netproxy is easy. If you have Docker installed, just clone the repositor
 
 This will build the image. Once it's done, run:
 
-    docker run -p 53:53/udp -p 80:80 -p 443:443 -i -t skorokithakis/netproxy
+    docker run -p 53:53/udp -p 80:80 -p 443:443 -d skorokithakis/netproxy
 
 and that's pretty much it! You are now ready to connect to it.
