@@ -4,6 +4,11 @@ netproxy
 netproxy is a Netflix/Hulu/Pandora/etc proxy in a box. Simply build the Docker image on a US server and set your
 computer's DNS server IP to it, and enjoy your favorite US-only sites.
 
+netproxy uses the excellent `tunlr-style-dns-unblocking` script to do the heavy lifting, calling it behind the scenes
+to set up a Docker container:
+
+https://github.com/trick77/tunlr-style-dns-unblocking/
+
 Running
 --------
 
