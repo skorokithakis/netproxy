@@ -31,9 +31,18 @@ There are two problems with this setup:
 1) Running a DNS server exposed to the entire internet is a very bad idea.
 2) Setting your primary DNS to a server in the US will slow your internet down significantly.
 
-To avoid these problems, you can change your hosts file to point everything to your netproxy IP (this is outside the
-scope of this document), and you can omit forwarding port 53. That means you should run docker like so:
+To avoid these problems, you can change your hosts file to point everything to your netproxy IP, and you can omit
+forwarding port 53. That means you should run docker like so:
 
     docker run -p 80:80 -p 443:443 -d skorokithakis/netproxy
 
-which should be much safer and faster.
+which should be much safer and faster. To generate the hosts file, just run:
+
+    python writehosts.py
+
+in the same directory as config.json (after having replaced your IP in the file), and a hosts file will be generated.
+Just append it to your normal hosts file like so:
+
+    sudo cat hosts >> /etc/hosts
+
+And everything should now go through the proxy.
