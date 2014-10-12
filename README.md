@@ -41,7 +41,7 @@ which should be much safer and faster. To generate the hosts file, just run:
     python writehosts.py
 
 in the same directory as config.json (after having replaced your IP in the file), and a hosts file will be generated.
-Just append it to your normal hosts file like so:
+Just append it to your normal hosts file *on your local machine* (the one you want to watch on) like so:
 
     sudo cat hosts >> /etc/hosts
 
