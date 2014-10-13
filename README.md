@@ -12,12 +12,18 @@ https://github.com/trick77/tunlr-style-dns-unblocking/
 Running
 --------
 
-Running netproxy is easy. If you have Docker installed, just clone the repository, edit `config.json` to replace
-`YOURIPHERE` with the external IP of your *server*, and run:
+Running netproxy is easy. If you have Docker installed, just clone the repository *on your server*, run the
+`preprocess.py` script:
+
+    python preprocess.py
+
+What this will do is download TSDU's config.json file, change a few entries and write it out, for the Dockerfile to
+use. It will also autodetect your server's IP and write it in the config file, so make sure you double-check that and
+change it if it's wrong, before building the image with:
 
     docker build -t skorokithakis/netproxy .
 
-This will build the image. Once it's done, run:
+Once building is done, run:
 
     docker run -p 53:53/udp -p 80:80 -p 443:443 -d skorokithakis/netproxy
 
@@ -36,12 +42,9 @@ forwarding port 53. That means you should run docker like so:
 
     docker run -p 80:80 -p 443:443 -d skorokithakis/netproxy
 
-which should be much safer and faster. To generate the hosts file, just run:
-
-    python writehosts.py
-
-in the same directory as config.json (after having replaced your IP in the file), and a hosts file will be generated.
-Just append it to your normal hosts file *on your local machine* (the one you want to watch on) like so:
+which should be much safer and faster. The hosts file entries will be generated when you run `preprocess.py` in the
+directory of the script, so just append them to your normal hosts file *on your local machine* (the one you want to
+watch on) like so:
 
     sudo cat hosts >> /etc/hosts
 
