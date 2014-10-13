@@ -2,6 +2,8 @@
 
 import json
 import re
+import string
+import random
 import urllib2
 
 print("Downloading configuration...")
@@ -21,6 +23,11 @@ try:
     config["haproxy_bind_ip"] = external_ip
 except:
     print("Could not detect external IP. Please change the haproxy_bind_ip setting in config.json before building.")
+
+# Change the stats password.
+config["stats"]["password"] = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(8))
+
+print("HAProxy stats password is %s, please make a note of it." % config["stats"]["password"])
 
 # Write it out.
 open("config.json", "w").write(json.dumps(config, sort_keys=True, indent=2))
