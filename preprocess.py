@@ -8,12 +8,13 @@ import random
 import urllib2
 
 
-def main(external_ip=None):
-    print("Downloading configuration...")
-
-    # Download TSDU's config.json.
-    json_config = urllib2.urlopen("https://raw.githubusercontent.com/trick77/tunlr-style-dns-unblocking/master/config.json").read()
-
+def main(external_ip=None, config_file=None):
+    if config_file:
+        json_config = config_file.read()
+    else:
+        # Download TSDU's config.json.
+        print("Downloading configuration...")
+        json_config = urllib2.urlopen("https://raw.githubusercontent.com/trick77/tunlr-style-dns-unblocking/master/config.json").read()
     # Remove comments.
     json_config = re.sub("//.*", "", json_config, re.MULTILINE)
     config = json.loads(json_config)
@@ -54,5 +55,6 @@ def main(external_ip=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Preprocess the netproxy config.")
     parser.add_argument("-e", "--externalip", metavar="IP", type=str, help="The external IP of the server (autodetected if not specified)")
+    parser.add_argument("-f", "--configfile", type=file, help="local config.json to drive haproxy configuration.  download from trick77 if not specifed")
     args = parser.parse_args()
-    main(external_ip=args.externalip)
+    main(external_ip=args.externalip, config_file=args.configfile)
